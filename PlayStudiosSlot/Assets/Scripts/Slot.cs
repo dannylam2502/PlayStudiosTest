@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class Slot : MonoBehaviour
 {
+    public SpriteRenderer spr;
     public const float SPEED = 5.0f;
-    private Vector3 _velocity;
     private Reel.OnSlotCollisionWithBottomCallback _onSlotCollisionWithBottomCallback;
     private string _collisionTag; // The tag that which handles the collision
+    private int _slotIndex;
+    public int GetSlotIndex()
+    {
+        return _slotIndex;
+    }
+
+    private void Awake()
+    {
+        if (spr == null)
+        {
+            spr = GetComponent<SpriteRenderer>();
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +31,14 @@ public class Slot : MonoBehaviour
     void Update()
     {
         
+    }
+
+    // @index: the current index of this slot in reel strip data
+    // @spriteSymbol: the current symbol of the slot
+    public void SetSlotData(int index, Sprite spriteSymbol)
+    {
+        _slotIndex = index;
+        spr.sprite = spriteSymbol;
     }
 
     public void Move(Vector3 distance)
