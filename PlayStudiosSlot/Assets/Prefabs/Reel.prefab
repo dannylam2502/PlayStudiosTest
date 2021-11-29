@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 236644046258257422}
   - component: {fileID: 236644046258257421}
   m_Layer: 0
-  m_Name: Reel1
+  m_Name: Reel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
   - {fileID: 236644047931978666}
   - {fileID: 236644045877311947}
   bottomCollider: {fileID: 0}
-  _slotVelocity: {x: 0, y: -12, z: 0}
+  _slotVelocity: {x: 0, y: -20, z: 0}
   _topSlot: {fileID: 236644046499611419}
 --- !u!1 &236644046499611397
 GameObject:
