@@ -9,6 +9,8 @@ public class Slot : MonoBehaviour
     private Reel.OnSlotCollisionWithBottomCallback _onSlotCollisionWithBottomCallback;
     private string _collisionTag; // The tag that which handles the collision
     private int _slotIndex;
+
+    private Coroutine _routineFadeEffect;
     public int GetSlotIndex()
     {
         return _slotIndex;
@@ -30,7 +32,21 @@ public class Slot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            PlayFadeAnimation();
+        }
+#endif
+    }
+
+    public void OnSpin()
+    {
+        if (_routineFadeEffect != null)
+        {
+            StopCoroutine(_routineFadeEffect);
+        }
+        spr.color = new Color(1f, 1f, 1f, 1.0f);
     }
 
     // @index: the current index of this slot in reel strip data
@@ -66,6 +82,24 @@ public class Slot : MonoBehaviour
         if (collision.CompareTag(_collisionTag))
         {
             _onSlotCollisionWithBottomCallback?.Invoke(this);
+        }
+    }
+
+    public void PlayFadeAnimation()
+    {
+        if (_routineFadeEffect != null)
+        {
+            StopCoroutine(_routineFadeEffect);
+        }
+        _routineFadeEffect = StartCoroutine(RoutineFadeEffect());
+    }
+
+    public IEnumerator RoutineFadeEffect()
+    {
+        while (true)
+        {
+            spr.color = new Color(1f, 1f, 1f, Mathf.Repeat(Time.time, 1.0f));
+            yield return new WaitForEndOfFrame();
         }
     }
 }

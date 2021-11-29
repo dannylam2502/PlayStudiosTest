@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+    public SlotMachineController slotMachineController;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,13 @@ public class UIController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnClickBtnSpin()
+    {
+        if (slotMachineController)
+        {
+            slotMachineController.Spin();
+        }
     }
 }

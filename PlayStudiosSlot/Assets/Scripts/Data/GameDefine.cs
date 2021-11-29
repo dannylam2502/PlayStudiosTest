@@ -9,3 +9,12 @@ public class GameConst
     public const string DIAMOND_SYMBOL = "DIAMOND";
     public const string SPADES_SYMBOL = "SPADES";
 }
+
+public enum ReelState
+{
+    kNone = 0,
+    kSpinning,
+    kSpinToResult,
+    kSpinToResult2,
+    kStopped
+}
