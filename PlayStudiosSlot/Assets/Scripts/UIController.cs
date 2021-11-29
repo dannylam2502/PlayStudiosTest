@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    public SlotMachineController slotMachineController;
+    public GameController gameController;
+    public Text txtTotalWin;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,14 +16,17 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameController)
+        {
+            txtTotalWin.text = gameController.TotalScore.ToString("n0");
+        }
     }
 
     public void OnClickBtnSpin()
     {
-        if (slotMachineController)
+        if (gameController)
         {
-            slotMachineController.Spin();
+            gameController.StartSpin();
         }
     }
 }

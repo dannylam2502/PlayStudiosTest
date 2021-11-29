@@ -109,7 +109,8 @@ public class Reel : MonoBehaviour
             if (_resultSlot && _resultSlot.transform.position.y > 0) // Above center
             {
                 // Change velocity here a little bit for better feeling
-                _currentSlotVelocity *= 0.99f;
+                // lose 1% per frame
+                _currentSlotVelocity.y = Mathf.Clamp(_currentSlotVelocity.y * 0.99f, _slotVelocity.y, -3.0f);
                 MoveSlots(_currentSlotVelocity);
             }
             // Relayout the slots

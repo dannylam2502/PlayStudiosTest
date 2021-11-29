@@ -8,6 +8,8 @@ public class SlotMachineController : MonoBehaviour
     public List<Reel> reels;
 
     public List<float> reelStopTimes;
+
+    GameController.OnSpinEnd _onSpinEndCallback;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,11 @@ public class SlotMachineController : MonoBehaviour
         StartCoroutine(RoutineStopReelAndShowResult(randomSpinResult));
     }
 
+    public void SetOnSpinEndCallback(GameController.OnSpinEnd cb)
+    {
+        _onSpinEndCallback = cb;
+    }
+
     public IEnumerator RoutineStopReelAndShowResult(SpinDetailData spinResult)
     {
         for (int i = 0; i < reels.Count && i < reelStopTimes.Count; i++)
@@ -52,6 +59,7 @@ public class SlotMachineController : MonoBehaviour
                 reels[i].AnimateWinSymbol();
             }
         }
+        _onSpinEndCallback?.Invoke(spinResult.WinAmount);
         yield break;
     }
 
